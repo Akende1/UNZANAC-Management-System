@@ -26,8 +26,6 @@ SECRET_KEY = 'django-insecure-@#(rd!yz8b^2cv02f$o9l(fbhh8#ok2zgte$(vcr2*=**__-29
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -46,7 +44,15 @@ INSTALLED_APPS = [
     'members',
     'notifications',
     'corsheaders',
+    'corshearders'
 ]
+
+MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # ➤ Add this line FIRST
+    'django.middleware.security.SecurityMiddleware',
+    ...
+]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -56,7 +62,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-     'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'UNZANAC_Management_System.urls'
@@ -76,7 +81,7 @@ TEMPLATES = [
     },
 ]
 
-# UNZANAC_Management_System/settings.py
+
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
 
 
@@ -143,3 +148,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # our backed should be put here
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
