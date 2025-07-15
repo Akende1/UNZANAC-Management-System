@@ -2,5 +2,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('index/', views.greet)
+    path('', views.index, name='members_index'),
 ]
